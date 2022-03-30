@@ -1,34 +1,25 @@
 <template>
      <div class="type-nav">
             <div class="container">
-                <h2 class="all">全部商品分类</h2>
-                <nav class="nav">
-                    <a href="###">服装城</a>
-                    <a href="###">美妆馆</a>
-                    <a href="###">尚品汇超市</a>
-                    <a href="###">全球购</a>
-                    <a href="###">闪购</a>
-                    <a href="###">团购</a>
-                    <a href="###">有趣</a>
-                    <a href="###">秒杀</a>
-                </nav>
-                <div class="sort">
-                    <div class="all-sort-list2">
-                        <div class="item">
-                            <h3>
-                                <a href="">图书、音像、数字商品</a>
+               <div @mouseleave="getLeave">
+                  <h2 class="all">全部商品分类</h2>
+                  <div class="sort">
+                    <div class="all-sort-list2" @click="getSearch">
+                        <div class="item"  v-for="(item1,index) in categoryList" :key='item1.id' :class="{bgc:currentIndex==index}">
+                            <h3  @mouseenter="getFocus(index)">
+                                <a :data-categoryName='item1.goodsName' :data-category1Id='item1.id'>{{item1.goodsName}}</a>
                             </h3>
-                            <div class="item-list clearfix">
+                            <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
                                 <div class="subitem">
                                     <dl class="fore">
-                                        <dt>
-                                            <a href="">电子书</a>
+                                        <dt v-for="(item2) in item1.goodsChildren" :key='item2.id'>
+                                            <a :data-categoryName='item2.goodsName' :data-category2Id='item2.id' >{{item2.goodsName}}</a>
                                         </dt>
-                                        <dd>
+                                        <dd v-for="(item3) in item1.goodsChildren.goodsChildren" :key='item3.id'>
                                             <em>
-                                                <a href="">婚恋/两性</a>
+                                                <a :data-categoryName='item3.goodsName' :data-category3Id='item3.id' >{{item3.goodsName}}</a>
                                             </em>
-                                            <em>
+                                            <!-- <em>
                                                 <a href="">文学</a>
                                             </em>
                                             <em>
@@ -36,13 +27,13 @@
                                             </em>
                                             <em>
                                                 <a href="">畅读VIP</a>
-                                            </em>
+                                            </em> -->
                                         </dd>
                                     </dl>
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
+                        <!-- <div class="item">
                             <h3>
                                 <a href="">家用电器</a>
                             </h3>
@@ -1684,17 +1675,68 @@
                             <h3>
                                 <a href="">箱包</a>
                             </h3>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+               </div>
+                <nav class="nav">
+                    <a href="###">服装城</a>
+                    <a href="###">美妆馆</a>
+                    <a href="###">尚品汇超市</a>
+                    <a href="###">全球购</a>
+                    <a href="###">闪购</a>
+                    <a href="###">团购</a>
+                    <a href="###">有趣</a>
+                    <a href="###">秒杀</a>
+                </nav>
+              
             </div>
         </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+//引入节流插件
+import throttle from 'lodash/throttle'
 export default {
   name:'TypeNav',
+  data(){
+    return {
+        // bgcClassName:'bgcColor',
+        currentIndex:-1
+    }
+  },
+  methods:{
+    //鼠标进入修改currentIndex属性
+    getFocus:throttle(function(index){
+    // index一级分类的索引值
+    this.currentIndex=index
+     console.log(index)
+    },50),
+    //鼠标移出回调
+    getLeave(){
+      this.currentIndex=-1
+    },
+    //路由跳转
+    getSearch(event){
+//获取自定义属性，区分一级、二级、三级分类
+    const {categoryname,category1id,category2id,category3id}=event.target.dataset
+    if(categoryname) {
+      let location = {path:'/search'}
+      let query = {categoryName:categoryname}
+      if(category1id) {
+        query.category1Id=category1id
+      }else if(category2id) {
+        query.category2Id=category2id
+      }else {
+        query.category3Id=category3id
+      }
+      location.query=query
+      console.log('jjjjjjjj',location)
+      this.$router.push(location)
+    }
+        }
+  },
   mounted(){
     this.$store.dispatch('categoryList')
   },
@@ -1761,7 +1803,11 @@ computed:{
 
                             a {
                                 color: #333;
+                               
                             }
+                            //  &:hover {
+                            //         background-color: skyblue;
+                            //     }
                         }
 
                         .item-list {
@@ -1818,13 +1864,18 @@ computed:{
                             }
                         }
 
-                        &:hover {
-                            .item-list {
-                                display: block;
-                            }
-                        }
+                        // &:hover {
+                        //     .item-list {
+                        //         display: block;
+                        //     }
+                        // }
                     }
                 }
+            }
+            .bgc {
+              // &:hover {
+                background-color: skyblue;
+              // }
             }
         }
     }
