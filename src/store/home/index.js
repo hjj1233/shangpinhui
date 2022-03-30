@@ -15,6 +15,7 @@ const actions={
   async categoryList({commit}){
 const reslut= await reqCtogryList()
 if(reslut.code == 200) {
+  console.log('=======',reslut.data)
   commit('CATEGORYLIST',reslut.data)
 }else {
   console.log('请求数据失败')
