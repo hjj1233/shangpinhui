@@ -1,6 +1,7 @@
 <template>
   <div>
     我是Search
+    <typeNav/>
   </div>
 </template>
 
