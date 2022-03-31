@@ -16,6 +16,10 @@ export default {
   components: {
     Header,
     Footer
+  },
+  mounted(){
+      this.$store.dispatch('categoryList')
+      console.log("======================",1)
   }
 }
 </script>

@@ -32,18 +32,32 @@
                 </h1>
                 <div class="searchArea">
                     <form action="###" class="searchForm">
-                        <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+                        <input type="text" v-model="keyWord" id="autocomplete" class="input-error input-xxlarge" />
                         <button class="sui-btn btn-xlarge btn-danger" type="button" @click="getSearch">搜索</button>
                     </form>
                 </div>
             </div>
-        </header></template>
+        </header>
+        </template>
 
 <script>
 export default {
+  data(){
+    return{
+        keyWord:''
+    }
+  },
 methods:{
   getSearch(){
-    this.$router.push('/search')
+
+    if(this.$route.query) {
+        let location = {name:'search',params:{keyWord:this.keyWord||undefined}}
+        location.query=this.$route.query
+         this.$router.push(location)
+    }
+    console.log(this.keyWord)
+  
+   
   }
 }
 }
