@@ -101,8 +101,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-
+name:"ListContainer",
+mounted(){
+  //引入数据接口
+  this.$store.dispatch('getBannerList')
+},
+computed:{
+    ...mapState({bannerList:state=>state.home.bannerList})
+}
 }
 </script>
 
