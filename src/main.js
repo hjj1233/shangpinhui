@@ -9,6 +9,8 @@ import store from './store'
 import  './mock/mockServe'
 //引入全局组件
 Vue.component(TypeNav.name,TypeNav)
+//引入swiper
+import 'swiper/css/swiper.min.css'
 Vue.config.productionTip = false
 
 new Vue({

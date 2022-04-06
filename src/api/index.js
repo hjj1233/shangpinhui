@@ -10,10 +10,15 @@ export  const  reqCtogryList=()=>{
 
 }
 
+//轮播图
 export  const  reqBannerList=()=>{
   // return requests({url:'/product/getBaseCategoryList',method:'get'})
   console.log('===========123',mockAjax.get('/banner'))
   return mockAjax.get('/banner')
-
-
+}
+//floor
+export  const  reqFloorList=()=>{
+  // return requests({url:'/product/getBaseCategoryList',method:'get'})
+  console.log('===========123',mockAjax.get('/floor'))
+  return mockAjax.get('/floor')
 }
