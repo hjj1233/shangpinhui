@@ -5,8 +5,8 @@
    <ListContainer/>
    <Recommend/>
    <Rank/>
-   <Floor />
-    <Floor />
+   <Floor v-for='floor in floorList' :key='floor.id'  :list='floor'/>
+    <!-- <Floor /> -->
     <Brand/>
   </div>
 </template>
@@ -17,6 +17,9 @@ import Recommend from './Recommend'
 import Rank from './Rank'
 import Floor from './Floor'
 import Brand from './Brand'
+
+
+import {mapState} from 'vuex'
 export default {
   // name:'Home',
   components:{
@@ -25,6 +28,12 @@ export default {
     Rank,
     Floor,
     Brand
+},
+mounted(){
+  this.$store.dispatch('getFloorList')
+},
+computed:{
+  ...mapState({floorList:state=>state.home.floorList})
 }
 }
 </script>
