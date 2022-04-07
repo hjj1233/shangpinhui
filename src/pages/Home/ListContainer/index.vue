@@ -3,19 +3,7 @@
             <div class="sortList clearfix">
                 <div class="center">
                     <!--banner轮播-->
-                    <div class="swiper-container" id="mySwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" v-for="slideshow in bannerList" :key='slideshow.id'>
-                                <img :src="slideshow.imgUrl" />
-                            </div>
-                        </div>
-                        <!-- 如果需要分页器 -->
-                        <div class="swiper-pagination"></div>
-
-                        <!-- 如果需要导航按钮 -->
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
+                  <Carouse :list='bannerList' />
                 </div>
                 <div class="right">
                     <div class="news">
@@ -102,7 +90,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import Swiper from 'swiper'
+// import Swiper from 'swiper'
 export default {
 name:"ListContainer",
 mounted(){
@@ -113,36 +101,36 @@ computed:{
     ...mapState({bannerList:state=>state.home.bannerList})
 },
 // $$nextTick：在下次dom更新 循环结束之后 执行延迟回调，在 修改数据之后 立即使用这个方法，获取更新后的dom
-watch:{
- bannerList:{
-    handler(nevValue,oldValue) {
-    console.log(nevValue,'=========',oldValue)
-    this.$nextTick(()=>{
-    new Swiper ('#mySwiper', {
-    // direction: 'vertical', // 垂直切换选项
-    loop: true, // 循环模式选项
-    autoplay:true,
-    // 如果需要分页器
-    pagination: {
-      el: '.swiper-pagination',
-      clickable:true,
-    },
+// watch:{
+//  bannerList:{
+//     handler(nevValue,oldValue) {
+//     console.log(nevValue,'=========',oldValue)
+//     this.$nextTick(()=>{
+//     new Swiper ('#mySwiper', {
+//     // direction: 'vertical', // 垂直切换选项
+//     loop: true, // 循环模式选项
+//     autoplay:true,
+//     // 如果需要分页器
+//     pagination: {
+//       el: '.swiper-pagination',
+//       clickable:true,
+//     },
     
-    // 如果需要前进后退按钮
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
+//     // 如果需要前进后退按钮
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+//     },
     
-    // 如果需要滚动条
-    scrollbar: {
-      el: '.swiper-scrollbar',
-    },
-  })  
-    })
-  }
- }
-}
+//     // 如果需要滚动条
+//     scrollbar: {
+//       el: '.swiper-scrollbar',
+//     },
+//   })  
+//     })
+//   }
+//  }
+// }
 // updated(){
 //    new Swiper ('#mySwiper', {
 //     // direction: 'vertical', // 垂直切换选项
