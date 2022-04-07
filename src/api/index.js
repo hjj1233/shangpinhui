@@ -22,3 +22,8 @@ export  const  reqFloorList=()=>{
   console.log('===========123',mockAjax.get('/floor'))
   return mockAjax.get('/floor')
 }
+//search
+
+export const reqCategoryList =(params)=>{
+return requests({url:'http://127.0.0.1:4523/mock/792804/list',method:'post',data:params})
+} 

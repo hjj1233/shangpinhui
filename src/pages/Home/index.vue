@@ -5,7 +5,7 @@
    <ListContainer/>
    <Recommend/>
    <Rank/>
-   <Floor v-for='floor in floorList' :key='floor.id'  :list='floor'/>
+   <Floor v-for='floor in floorList' :key='floor.id'  :list='floor' :floorData='floorList'/>
     <!-- <Floor /> -->
     <Brand/>
   </div>
