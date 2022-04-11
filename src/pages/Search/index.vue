@@ -23,7 +23,11 @@
         </div>
 
         <!--selector-->
+<<<<<<< HEAD
         <SearchSelector @brandMethods='brandMethods' />
+=======
+        <SearchSelector />
+>>>>>>> ea9662460eea79fe274ebf8042cfdbf0bfeaddf5
 
         <!--details-->
         <div class="details clearfix">
