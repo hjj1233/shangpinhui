@@ -91,7 +91,7 @@ export default {
         query.category3Id=category3id
       }
       location.query=query
-      console.log('jjjjjjjj',location)
+      console.log('jjjjjjjj00000',location)
       this.$router.push(location)
     }
         },

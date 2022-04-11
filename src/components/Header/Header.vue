@@ -47,17 +47,19 @@ export default {
         keyWord:''
     }
   },
+  mounted(){
+    this.$bus.$on('clear',()=>{
+      this.keyWord=''
+    })
+  },
 methods:{
   getSearch(){
-
     if(this.$route.query) {
         let location = {name:'search',params:{keyWord:this.keyWord||undefined}}
         location.query=this.$route.query
          this.$router.push(location)
-    }
-    console.log(this.keyWord)
-  
-   
+         console.log('ocation',location)
+    } 
   }
 }
 }
