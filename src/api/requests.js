@@ -17,6 +17,7 @@ const requests = axios.create({
 //请求拦截器：在发送请求之前，请求拦截器可以检测到，可以在请求发出去之前去做一些事情
 requests.interceptors.request.use((config)=>{
   //config:配置对象，对象里面有一个属性很重要，headers请求头
+  console.log('wwwwwwwwwwwwwwwwww',config)
   //进度条开始
   nprogress.start()
   return config
@@ -24,6 +25,7 @@ requests.interceptors.request.use((config)=>{
 //响应拦截器
 requests.interceptors.response.use((res)=>{
   //成功的回调函数：服务器相应数据回来以后，响应拦截器可以检测到，可以做一些事情
+  console.log('hhhhhhhhhhhhhhhhhhhhhh',res)
   //进度条失败
   nprogress.done()
   return res.data
